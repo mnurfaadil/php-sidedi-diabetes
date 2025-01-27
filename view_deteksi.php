@@ -1,182 +1,8 @@
 <?php
 include 'koneksi.php';
-
-if (isset($_POST['test'])) {
-    $jkel = $_POST['jkel'];
-    $usia = $_POST['usia'];
-    $banyak_kencing = $_POST['banyak_kencing'];
-    $turun_bb = $_POST['turun_bb'];
-    $luka_sukar = $_POST['luka_sukar'];
-    $kesemutan = $_POST['kesemutan'];
-    $lemas = $_POST['lemas'];
-    $kulit_gatal = $_POST['kulit_gatal'];
-    $keturunan = $_POST['keturunan'];
-
-    $sql =
-        "select 'ya' as kelas,
-
-        (
-            (
-                (
-                    (select val from pxci where kelas = 'usia' and atribut = '$usia' and kelas_prediksi = 'ya')*
-                    (select val from pci where kelas_prediksi = 'ya')
-                )/
-                (select val from px where kelas = 'usia' and atribut = '$usia')
-            )
-            *
-            (
-                (
-                    (select val from pxci where kelas = 'jkel' and atribut = '$jkel' and kelas_prediksi = 'ya')*
-                    (select val from pci where kelas_prediksi = 'ya')
-                )/
-                (select val from px where kelas = 'jkel' and atribut = '$jkel')
-            )
-            *
-            (
-                (
-                    (select val from pxci where kelas = 'banyak_kencing' and atribut = '$banyak_kencing' and kelas_prediksi = 'ya')*
-                    (select val from pci where kelas_prediksi = 'ya')
-                )/
-                (select val from px where kelas = 'banyak_kencing' and atribut = '$banyak_kencing')
-            )
-            *
-            (
-                (
-                    (select val from pxci where kelas = 'turun_bb' and atribut = '$turun_bb' and kelas_prediksi = 'ya')*
-                    (select val from pci where kelas_prediksi = 'ya')
-                )/
-                (select val from px where kelas = 'turun_bb' and atribut = '$turun_bb')
-            )
-            *
-            (
-                (
-                    (select val from pxci where kelas = 'luka_sukar' and atribut = '$luka_sukar' and kelas_prediksi = 'ya')*
-                    (select val from pci where kelas_prediksi = 'ya')
-                )/
-                (select val from px where kelas = 'luka_sukar' and atribut = '$luka_sukar')
-            )
-            *
-            (
-                (
-                    (select val from pxci where kelas = 'kesemutan' and atribut = '$kesemutan' and kelas_prediksi = 'ya')*
-                    (select val from pci where kelas_prediksi = 'ya')
-                )/
-                (select val from px where kelas = 'kesemutan' and atribut = '$kesemutan')
-            )
-            *
-            (
-                (
-                    (select val from pxci where kelas = 'lemas' and atribut = '$lemas' and kelas_prediksi = 'ya')*
-                    (select val from pci where kelas_prediksi = 'ya')
-                )/
-                (select val from px where kelas = 'lemas' and atribut = '$lemas')
-            )
-            *
-            (
-                (
-                    (select val from pxci where kelas = 'kulit_gatal' and atribut = '$kulit_gatal' and kelas_prediksi = 'ya')*
-                    (select val from pci where kelas_prediksi = 'ya')
-                )/
-                (select val from px where kelas = 'kulit_gatal' and atribut = '$kulit_gatal')
-            )
-            *
-            (
-                (
-                    (select val from pxci where kelas = 'keturunan' and atribut = '$keturunan' and kelas_prediksi = 'ya')*
-                    (select val from pci where kelas_prediksi = 'ya')
-                )/
-                (select val from px where kelas = 'keturunan' and atribut = '$keturunan')
-            )
-        )
-
-        union 
-
-        select 'tidak' as kelas,
-
-        (
-            (
-                (
-                    (select val from pxci where kelas = 'usia' and atribut = '$usia' and kelas_prediksi = 'tidak')*
-                    (select val from pci where kelas_prediksi = 'tidak')
-                )/
-                (select val from px where kelas = 'usia' and atribut = '$usia')
-            )
-            *
-            (
-                (
-                    (select val from pxci where kelas = 'jkel' and atribut = '$jkel' and kelas_prediksi = 'tidak')*
-                    (select val from pci where kelas_prediksi = 'tidak')
-                )/
-                (select val from px where kelas = 'jkel' and atribut = '$jkel')
-            )
-            *
-            (
-                (
-                    (select val from pxci where kelas = 'banyak_kencing' and atribut = '$banyak_kencing' and kelas_prediksi = 'tidak')*
-                    (select val from pci where kelas_prediksi = 'tidak')
-                )/
-                (select val from px where kelas = 'banyak_kencing' and atribut = '$banyak_kencing')
-            )
-            *
-            (
-                (
-                    (select val from pxci where kelas = 'turun_bb' and atribut = '$turun_bb' and kelas_prediksi = 'tidak')*
-                    (select val from pci where kelas_prediksi = 'tidak')
-                )/
-                (select val from px where kelas = 'turun_bb' and atribut = '$turun_bb')
-            )
-            *
-            (
-                (
-                    (select val from pxci where kelas = 'luka_sukar' and atribut = '$luka_sukar' and kelas_prediksi = 'tidak')*
-                    (select val from pci where kelas_prediksi = 'tidak')
-                )/
-                (select val from px where kelas = 'luka_sukar' and atribut = '$luka_sukar')
-            )
-            *
-            (
-                (
-                    (select val from pxci where kelas = 'kesemutan' and atribut = '$kesemutan' and kelas_prediksi = 'tidak')*
-                    (select val from pci where kelas_prediksi = 'tidak')
-                )/
-                (select val from px where kelas = 'kesemutan' and atribut = '$kesemutan')
-            )
-            *
-            (
-                (
-                    (select val from pxci where kelas = 'lemas' and atribut = '$lemas' and kelas_prediksi = 'tidak')*
-                    (select val from pci where kelas_prediksi = 'tidak')
-                )/
-                (select val from px where kelas = 'lemas' and atribut = '$lemas')
-            )
-            *
-            (
-                (
-                    (select val from pxci where kelas = 'kulit_gatal' and atribut = '$kulit_gatal' and kelas_prediksi = 'tidak')*
-                    (select val from pci where kelas_prediksi = 'tidak')
-                )/
-                (select val from px where kelas = 'kulit_gatal' and atribut = '$kulit_gatal')
-            )
-            *
-            (
-                (
-                    (select val from pxci where kelas = 'keturunan' and atribut = '$keturunan' and kelas_prediksi = 'tidak')*
-                    (select val from pci where kelas_prediksi = 'tidak')
-                )/
-                (select val from px where kelas = 'keturunan' and atribut = '$keturunan')
-            )
-        )
-        ";
-    $res = mysqli_query($koneksi, $sql);
-    $data = [];
-    while ($row = mysqli_fetch_array($res)) {
-        array_push($data, ['kelas' => $row[0], 'nilai' => $row[1]]);
-    }
-    $awal = $data;
-    $keys = array_column($data, 'nilai');
-    array_multisort($keys, SORT_DESC, $data);
-    $vonis = $data[0]['kelas'];
-
+session_start();
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['reset'])) {
+    session_unset();
 }
 
 ?>
@@ -193,7 +19,7 @@ if (isset($_POST['test'])) {
         integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
-    </script>
+        </script>
     <title>Test Deteksi</title>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.css">
 
@@ -212,203 +38,305 @@ if (isset($_POST['test'])) {
 <body style="background-color: grey;">
     <!-- Image and text -->
     <?php include 'nav.php'; ?>
-
     <div class="container" style="background-color: white; padding-top: 2%;padding-bottom: 2%;">
         <div class="ml-5 mr-5 ">
             <div class="row">
                 <div class="col-sm-6">
-                    <h1 class="text-center">Test Deteksi Diabetes</h1>
-                    <form method="POST">
+                    <form method="POST" action="detect.php">
+                        <h1 class="text-center">Test Deteksi Diabetes</h1>
+                        <?php $no = 1; ?>
                         <table style="width: 100%;">
                             <tr>
-                                <td>1.</td>
-                                <td>Jenis Kelamin</td>
+                                <td><?= $no++ ?>.</td>
+                                <td>Usia ≥ 45</td>
                             </tr>
                             <tr>
                                 <td></td>
                                 <td>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="jkel" id="jkelp" value="pria"
-                                            required>
-                                        <label class="form-check-label" for="jkelp">Pria</label>
+                                        <input class="form-check-input" type="radio" name="usia" id="usia1" value="1"
+                                            required <?php if (isset($_SESSION['usia']) && $_SESSION['usia'] == '1')
+                                                echo 'checked'; ?>>
+                                        <label class="form-check-label" for="usia1">Ya</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="jkel" id="jkelw"
-                                            value="wanita" required>
-                                        <label class="form-check-label" for="jkelw">Wanita</label>
+                                        <input class="form-check-input" type="radio" name="usia" id="usia2" value="0"
+                                            required <?php if (isset($_SESSION['usia']) && $_SESSION['usia'] == '0')
+                                                echo 'checked'; ?>>
+                                        <label class="form-check-label" for="usia2">Tidak</label>
                                     </div>
                                 </td>
                             </tr>
 
                             <tr>
-                                <td>2.</td>
-                                <td>Usia</td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="usia" id="usia1"
-                                            value="20-40" required>
-                                        <label class="form-check-label" for="usia1">20-40 tahun</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="usia" id="usia2"
-                                            value="40-50" required>
-                                        <label class="form-check-label" for="usia2">40-50 tahun</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="usia" id="usia3"
-                                            value="50-60" required>
-                                        <label class="form-check-label" for="usia3">50-60 tahun</label>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>3.</td>
-                                <td>Banyak kencing akhir-akhir ini?</td>
+                                <td><?= $no++ ?>.</td>
+                                <td>Banyak kencing (Poliuria)?</td>
                             </tr>
                             <tr>
                                 <td></td>
                                 <td>
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio" name="banyak_kencing" id="bk1"
-                                            value="ya" required>
+                                            value="1" required <?php if (isset($_SESSION['banyak_kencing']) && $_SESSION['banyak_kencing'] == '1')
+                                                echo 'checked'; ?>>
                                         <label class="form-check-label" for="bk1">Ya</label>
                                     </div>
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio" name="banyak_kencing" id="bk2"
-                                            value="tidak" required>
+                                            value="0" required <?php if (isset($_SESSION['banyak_kencing']) && $_SESSION['banyak_kencing'] == '0')
+                                                echo 'checked'; ?>>
                                         <label class="form-check-label" for="bk2">Tidak</label>
                                     </div>
                                 </td>
                             </tr>
 
                             <tr>
-                                <td>4.</td>
-                                <td>Turun Berat Badan Ekstrem ?</td>
+                                <td><?= $no++ ?>.</td>
+                                <td>Banyak minum (Polidipsia)?</td>
                             </tr>
                             <tr>
                                 <td></td>
                                 <td>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="turun_bb" id="bb1" value="ya"
-                                            required>
+                                        <input class="form-check-input" type="radio" name="polidipsia" id="pd1"
+                                            value="1" required <?php if (isset($_SESSION['polidipsia']) && $_SESSION['polidipsia'] == '1')
+                                                echo 'checked'; ?>>
+                                        <label class="form-check-label" for="pd1">Ya</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="polidipsia" id="pd2"
+                                            value="0" required <?php if (isset($_SESSION['polidipsia']) && $_SESSION['polidipsia'] == '0')
+                                                echo 'checked'; ?>>
+                                        <label class="form-check-label" for="pd2">Tidak</label>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td><?= $no++ ?>.</td>
+                                <td>Penurunan Berat Badan?</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="turun_bb" id="bb1" value="1"
+                                            required <?php if (isset($_SESSION['turun_bb']) && $_SESSION['turun_bb'] == '1')
+                                                echo 'checked'; ?>>
                                         <label class="form-check-label" for="bb1">Ya</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="turun_bb" id="bb2"
-                                            value="tidak" required>
+                                        <input class="form-check-input" type="radio" name="turun_bb" id="bb2" value="0"
+                                            required <?php if (isset($_SESSION['turun_bb']) && $_SESSION['turun_bb'] == '0')
+                                                echo 'checked'; ?>>
                                         <label class="form-check-label" for="bb2">Tidak</label>
                                     </div>
                                 </td>
                             </tr>
 
                             <tr>
-                                <td>5.</td>
-                                <td>Luka Sukar sembuh ?</td>
+                                <td><?= $no++ ?>.</td>
+                                <td>Luka Sukar sembuh?</td>
                             </tr>
                             <tr>
                                 <td></td>
                                 <td>
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio" name="luka_sukar" id="ls1"
-                                            value="ya" required>
+                                            value="1" required <?php if (isset($_SESSION['luka_sukar']) && $_SESSION['luka_sukar'] == '1')
+                                                echo 'checked'; ?>>
                                         <label class="form-check-label" for="ls1">Ya</label>
                                     </div>
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio" name="luka_sukar" id="ls2"
-                                            value="tidak" required>
+                                            value="0" required <?php if (isset($_SESSION['luka_sukar']) && $_SESSION['luka_sukar'] == '0')
+                                                echo 'checked'; ?>>
                                         <label class="form-check-label" for="ls2">Tidak</label>
                                     </div>
                                 </td>
                             </tr>
 
                             <tr>
-                                <td>6.</td>
-                                <td>Sering merasa kesemutan ?</td>
+                                <td><?= $no++ ?>.</td>
+                                <td>Sering merasa letih/lemas?</td>
                             </tr>
                             <tr>
                                 <td></td>
                                 <td>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="kesemutan" id="ks1"
-                                            value="ya" required>
-                                        <label class="form-check-label" for="ks1">Ya</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="kesemutan" id="ks2"
-                                            value="tidak" required>
-                                        <label class="form-check-label" for="ks2">Tidak</label>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>7.</td>
-                                <td>Sering merasa letih / lemas ?</td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="lemas" id="lms1" value="ya"
-                                            required>
+                                        <input class="form-check-input" type="radio" name="lemas" id="lms1" value="1"
+                                            required <?php if (isset($_SESSION['lemas']) && $_SESSION['lemas'] == '1')
+                                                echo 'checked'; ?>>
                                         <label class="form-check-label" for="lms1">Ya</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="lemas" id="lms2"
-                                            value="tidak" required>
+                                        <input class="form-check-input" type="radio" name="lemas" id="lms2" value="0"
+                                            required <?php if (isset($_SESSION['lemas']) && $_SESSION['lemas'] == '0')
+                                                echo 'checked'; ?>>
                                         <label class="form-check-label" for="lms2">Tidak</label>
                                     </div>
                                 </td>
                             </tr>
 
                             <tr>
-                                <td>8.</td>
-                                <td>Kulit merasa gatal-gatal ?</td>
+                                <td><?= $no++ ?>.</td>
+                                <td>Memiliki riwayat keturunan diabetes dalam keluarga?</td>
                             </tr>
                             <tr>
                                 <td></td>
                                 <td>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="kulit_gatal" id="kg1"
-                                            value="ya" required>
-                                        <label class="form-check-label" for="kg1">Ya</label>
+                                        <input class="form-check-input" type="radio" name="keturunan" id="kt1" value="1"
+                                            required <?php if (isset($_SESSION['keturunan']) && $_SESSION['keturunan'] == '1')
+                                                echo 'checked'; ?>>
+                                        <label class="form-check-label" for="kt1">Ya</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="kulit_gatal" id="kg2"
-                                            value="tidak" required>
-                                        <label class="form-check-label" for="kg2">Tidak</label>
+                                        <input class="form-check-input" type="radio" name="keturunan" id="kt2" value="0"
+                                            required <?php if (isset($_SESSION['keturunan']) && $_SESSION['keturunan'] == '0')
+                                                echo 'checked'; ?>>
+                                        <label class="form-check-label" for="kt2">Tidak</label>
                                     </div>
                                 </td>
                             </tr>
 
                             <tr>
-                                <td>9.</td>
-                                <td>Memiliki riwayat keturunan diabetes dalam keluarga ?</td>
+                                <td><?= $no++ ?>.</td>
+                                <td>Obesitas?</td>
                             </tr>
                             <tr>
                                 <td></td>
                                 <td>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="keturunan" id="kt1"
-                                            value="ya" required>
-                                        <label class="form-check-label" for="kt1">Ya</label>
+                                        <input class="form-check-input" type="radio" name="obesitas" id="ob1" value="1"
+                                            required <?php if (isset($_SESSION['obesitas']) && $_SESSION['obesitas'] == '1')
+                                                echo 'checked'; ?>>
+                                        <label class="form-check-label" for="ob1">Ya</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="keturunan" id="kt2"
-                                            value="tidak" required>
-                                        <label class="form-check-label" for="kt2">Tidak</label>
+                                        <input class="form-check-input" type="radio" name="obesitas" id="ob2" value="0"
+                                            required <?php if (isset($_SESSION['obesitas']) && $_SESSION['obesitas'] == '0')
+                                                echo 'checked'; ?>>
+                                        <label class="form-check-label" for="ob2">Tidak</label>
                                     </div>
                                 </td>
                             </tr>
+
+                            <tr>
+                                <td><?= $no++ ?>.</td>
+                                <td>Sedentari (Kurang aktivitas fisik)?</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="sedentari" id="sd1" value="1"
+                                            required <?php if (isset($_SESSION['sedentari']) && $_SESSION['sedentari'] == '1')
+                                                echo 'checked'; ?>>
+                                        <label class="form-check-label" for="sd1">Ya</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="sedentari" id="sd2" value="0"
+                                            required <?php if (isset($_SESSION['sedentari']) && $_SESSION['sedentari'] == '0')
+                                                echo 'checked'; ?>>
+                                        <label class="form-check-label" for="sd2">Tidak</label>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td><?= $no++ ?>.</td>
+                                <td>Pola Makan Tidak Sehat?</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="pola_makan" id="pm1"
+                                            value="1" required <?php if (isset($_SESSION['pola_makan']) && $_SESSION['pola_makan'] == '1')
+                                                echo 'checked'; ?>>
+                                        <label class="form-check-label" for="pm1">Ya</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="pola_makan" id="pm2"
+                                            value="0" required <?php if (isset($_SESSION['pola_makan']) && $_SESSION['pola_makan'] == '0')
+                                                echo 'checked'; ?>>
+                                        <label class="form-check-label" for="pm2">Tidak</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><?= $no++ ?>.</td>
+                                <td>Gula Darah Puasa ≥ 126 mg/dL</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="gula_puasa" id="gp1"
+                                            value="1" required <?php if (isset($_SESSION['gula_puasa']) && $_SESSION['gula_puasa'] == '1')
+                                                echo 'checked'; ?>>
+                                        <label class="form-check-label" for="gp1">Ya</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="gula_puasa" id="gp2"
+                                            value="0" required <?php if (isset($_SESSION['gula_puasa']) && $_SESSION['gula_puasa'] == '0')
+                                                echo 'checked'; ?>>
+                                        <label class="form-check-label" for="gp2">Tidak</label>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td><?= $no++ ?>.</td>
+                                <td>Gula Darah Sewaktu ≥ 200 mg/dL</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="gula_sewaktu" id="gs1"
+                                            value="1" required <?php if (isset($_SESSION['gula_sewaktu']) && $_SESSION['gula_sewaktu'] == '1')
+                                                echo 'checked'; ?>>
+                                        <label class="form-check-label" for="gs1">Ya</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="gula_sewaktu" id="gs2"
+                                            value="0" required <?php if (isset($_SESSION['gula_sewaktu']) && $_SESSION['gula_sewaktu'] == '0')
+                                                echo 'checked'; ?>>
+                                        <label class="form-check-label" for="gs2">Tidak</label>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td><?= $no++ ?>.</td>
+                                <td>HbA1c ≥ 6.5%</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="hba1c" id="h1" value="1"
+                                            required <?php if (isset($_SESSION['hba1c']) && $_SESSION['hba1c'] == '1')
+                                                echo 'checked'; ?>>
+                                        <label class="form-check-label" for="h1">Ya</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="hba1c" id="h2" value="0"
+                                            required <?php if (isset($_SESSION['hba1c']) && $_SESSION['hba1c'] == '0')
+                                                echo 'checked'; ?>>
+                                        <label class="form-check-label" for="h2">Tidak</label>
+                                    </div>
+                                </td>
+                            </tr>
+
                             <tr class="text-center">
                                 <td colspan="2"><button type="submit" class="btn btn-warning btn-block"
                                         name="test">Deteksi</button></td>
                             </tr>
                         </table>
+
                     </form>
                 </div>
                 <div class="col-sm-6">
@@ -416,40 +344,63 @@ if (isset($_POST['test'])) {
                     <table style="width: 100%;">
                         <tr>
                             <td>Terdeteksi Ya</td>
-                            <td><?php if(isset($vonis)){echo round($awal[0]['nilai'],4);}else{echo '-';} ?></td>
+                            <td><?php if (isset($_SESSION['prediction'])) {
+                                echo round($_SESSION['prediction']['diabetes'], 4);
+                            } else {
+                                echo '-';
+                            } ?>
+                            </td>
                         </tr>
                         <tr>
                             <td>Terdeteksi Tidak</td>
-                            <td><?php if(isset($vonis)){echo round($awal[1]['nilai'],4);}else{echo '-';} ?></td>
+                            <td><?php if (isset($_SESSION['prediction'])) {
+                                echo round($_SESSION['prediction']['non-diabetes'], 4);
+                            } else {
+                                echo '-';
+                            } ?>
+                            </td>
                         </tr>
                         <tr class="text-center">
                             <td colspan="2">Hasil Deteksi : </td>
                         </tr>
                         <tr class="text-center" style="background-color: yellow;">
-                            <td colspan="2"><b><?php if(isset($vonis)){echo $vonis;}else{echo '-';} ?></b> </td>
+                            <td colspan="2">
+                                <b><?php if (isset($_SESSION['prediction'])) {
+                                    echo $_SESSION['prediction']['hasil'];
+                                } else {
+                                    echo '-';
+                                } ?></b>
+                            </td>
                         </tr>
+                        <?php if (isset($_SESSION['prediction'])) {
+                            echo '<tr>
+                                    <td colspan="2">
+                                        <form method="POST">
+                                            <button type="submit" class="btn btn-warning btn-block w-100"
+                                            name="reset">Periksa Kembali</button>
+                                        </form>
+                                    </td>
+                                </tr>';
+                        }?>
+                        
                     </table>
                 </div>
             </div>
-
         </div>
     </div>
-
-
 
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous">
-    </script>
+        </script>
 
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <!--
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
     -->
-
 
 </body>
 

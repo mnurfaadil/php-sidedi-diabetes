@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>SiDeDi Diabetes</title>
 </head>
 
 <body>
@@ -18,19 +18,27 @@
             </a>
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="/uas_spk/view_training.php">Data Training</a>
+                    <a class="nav-link" href="/view_training.php">Data Training</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/uas_spk/view_naive_bayes.php">Naive Bayes</a>
+                    <a class="nav-link" href="/view_naive_bayes.php">Naive Bayes</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/uas_spk/view_deteksi.php">Deteksi</a>
+                    <a class="nav-link" href="/view_deteksi.php">Deteksi</a>
                 </li>
             </ul>
-            <button type="button" class="btn btn-outline-warning btn-sm" data-bs-toggle="modal"
-                data-bs-target="#exampleModal">
-                Import Data
-            </button>
+            <div>
+                <button type="button" class="btn btn-outline-danger btn-sm" onclick="bersihkanData()">
+                    Bersihkan Data
+                </button>
+                <button type="button" class="btn btn-outline-info btn-sm" onclick="latihData()">
+                    Latih Data
+                </button>
+                <button type="button" class="btn btn-outline-warning btn-sm" data-bs-toggle="modal"
+                    data-bs-target="#exampleModal">
+                    Import Data
+                </button>
+            </div>
         </div>
     </nav>
 
@@ -44,10 +52,17 @@
                 <form action="import_data.php" method="POST" enctype="multipart/form-data" >
                     <div class="modal-body">
                         <div class="mb-3">
-                            <label for="formFile" class="form-label">Pilih file Excel</label>
+                            <label class="form-label">Download Template Excel</label>
+                            <div>
+                                <a href="file/import-template.xlsx" class="btn btn-success btn-sm" download>
+                                    Download Template
+                                </a>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">Import file Excel</label>
                             <input class="form-control" type="file" id="formFile" required  name="form_excel">
                         </div>
-
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
@@ -58,5 +73,20 @@
         </div>
     </div>
 </body>
+
+<script>
+    function latihData() {
+        if (confirm("Latih data model?")) {
+            window.location.href = '/core/train_model.php';
+        }
+    }
+    function bersihkanData() {
+        if (confirm("Bersihkan data? Semua data akan hilang!")) {
+            if (confirm("Apakah anda benar-benar yakin untuk membersihkan data?")) {
+                window.location.href = '/core/clear_model.php';
+            }
+        }
+    }
+</script>
 
 </html>

@@ -167,7 +167,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             )
         )
         ";
-
+    echo $sql;
     $res = mysqli_query($koneksi, $sql);
     $data = [];
     while ($row = mysqli_fetch_array($res)) {

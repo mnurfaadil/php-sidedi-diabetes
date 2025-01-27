@@ -25,34 +25,33 @@ if (isset($_POST['import_file'])) {
             }
             $rows[] = array_combine($header_values, $r);
         }
+        $created_at = date('Y-m-d H:i:s');
         // print_r($rows);
-
-        $sql = "insert into training (usia,jkel,banyak_kencing,turun_bb,luka_sukar,kesemutan,lemas,kulit_gatal,keturunan,hasil,waktu_insert) values ";
-
+        $sql = "insert into diabetes_dataset (Polidipsia,Poliuria,Penurunan_Berat_Badan,Lelah,Luka_Sulit_Sembuh,Usia,Riwayat_Keluarga,Obesitas,Sedentari,Pola_Makan_Tidak_Sehat,Gula_Darah_Puasa,Gula_Darah_Sewaktu,HbA1c,Diabetes,created_at) values ";
         for ($i=0; $i < count($rows) ; $i++) { 
-            $usia = $rows[$i]['usia'];
-            $jkel = $rows[$i]['jkel'];
-            $banyak_kencing = $rows[$i]['banyak_kencing'];
-            $turun_bb = $rows[$i]['turun_bb'];
-            $luka_sukar = $rows[$i]['luka_sukar'];
-            $kesemutan = $rows[$i]['kesemutan'];
-            $lemas = $rows[$i]['lemas'];
-            $kulit_gatal = $rows[$i]['kulit_gatal'];
-            $keturunan = $rows[$i]['keturunan'];
-            $hasil = $rows[$i]['hasil'];
-
-            $sql.=  "('$usia','$jkel','$banyak_kencing','$turun_bb','$luka_sukar','$kesemutan','$lemas','$kulit_gatal','$keturunan','$hasil',current_timestamp()),";
+            $polidipsia = $rows[$i]['Polidipsia'];
+            $poliuria = $rows[$i]['Poliuria']; 
+            $penurunan_bb = $rows[$i]['Penurunan_Berat_Badan'];
+            $lelah = $rows[$i]['Lelah'];
+            $luka_sulit = $rows[$i]['Luka_Sulit_Sembuh'];
+            $usia = $rows[$i]['Usia'];
+            $riwayat = $rows[$i]['Riwayat_Keluarga'];
+            $obesitas = $rows[$i]['Obesitas'];
+            $sedentari = $rows[$i]['Sedentari'];
+            $pola_makan = $rows[$i]['Pola_Makan_Tidak_Sehat'];
+            $gula_puasa = $rows[$i]['Gula_Darah_Puasa'];
+            $gula_sewaktu = $rows[$i]['Gula_Darah_Sewaktu'];
+            $hba1c = $rows[$i]['HbA1c'];
+            $diabetes = $rows[$i]['Diabetes'];
+            
+            $sql .= "('$polidipsia','$poliuria','$penurunan_bb','$lelah','$luka_sulit','$usia','$riwayat','$obesitas','$sedentari','$pola_makan','$gula_puasa','$gula_sewaktu','$hba1c','$diabetes','$created_at'),";
         }
         $sql = substr($sql, 0, -1); // menghilangkan koma diakhir
         $sql .= ';';
 
         $insert = mysqli_query($koneksi,$sql);
-        if($insert > 0){
-            echo "<script>alert('DATA BERHASIL DIIMPORT')</script>";
-        }else{
-            echo "<script>alert('DATA GAGAL DIIMPORT')</script>";
-        }
-        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        $_SESSION['jumlah_insert'] = count($rows);
+        header('Location: core/train_model.php');
         // echo $sql;
 
         // or $xlsx->toHTML();	

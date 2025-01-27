@@ -1,0 +1,2 @@
+# Larang akses langsung ke semua file
+Deny from all

@@ -1,18 +1,6 @@
 <?php 
 include 'koneksi.php';
 
-if(isset($_POST['hapus'])){
-    // echo 'hapus';
-    $id = $_POST['id'];
-    $SQL_hapus = "delete from training where id = $id";
-    $res = mysqli_query($koneksi,$SQL_hapus);
-    if($res > 0){
-        echo "<script>alert('data berhasil dihapus')</script>";
-    }else{
-        echo "<script>alert('data gagal dihapus')</script>";
-    }
-}
-
 ?>
 <!doctype html>
 <html lang="en">
@@ -38,6 +26,7 @@ if(isset($_POST['hapus'])){
 
 <body style="background-color: grey;">
     <!-- Image and text -->
+    <?php $dataDetail = []; ?>
     <?php include 'nav.php'; ?>
 
 
@@ -60,14 +49,17 @@ if(isset($_POST['hapus'])){
                 <tbody>
                     <?php 
 
-                    $SQL = "select * from pci";
+                    $SQL = "select * from diabetes_model";
 
                     $rs = mysqli_query($koneksi,$SQL);
                     while($row = mysqli_fetch_array($rs)){
-                        $kelas = $row['kelas_prediksi'];
-                        $a = $row['count_of'];
-                        $b = $row['count_all'];
-                        $val = $row['val'];
+                        
+                        $dataDetail[$row['kelas']] = json_decode($row['model_statistik'], true);
+                        
+                        $kelas = $row['kelas'];
+                        $a = $row['jumlah_sample'];
+                        $b = $row['jumlah_data'];
+                        $val = $row['model_probabilitas'];
 
                         echo "
                         <tr>
@@ -95,24 +87,22 @@ if(isset($_POST['hapus'])){
                 <tbody>
                     <?php 
 
-                    $SQL = "select * from px";
+                    foreach ($dataDetail as $kelas => $data) {
+                        foreach ($data as $atribut => $value) {
+                                    
+                                $a = $value['countValues'];
+                                $b = $value['countData'];
+                                $val = $value['px'];
 
-                    $rs = mysqli_query($koneksi,$SQL);
-                    while($row = mysqli_fetch_array($rs)){
-                        $kelas = $row['kelas'];
-                        $atribut = $row['atribut'];
-                        $a = $row['count_of'];
-                        $b = $row['count_all'];
-                        $val = $row['val'];
-
-                        echo "
-                        <tr>
-                        <td>$kelas</td>
-                        <td>$atribut</td>
-                        <td>$a / $b</td>
-                        <td>$val</td>
-                        </tr>
-                        ";
+                                echo "
+                                <tr>
+                                <td>$kelas</td>
+                                <td>$atribut</td>
+                                <td>$a / $b</td>
+                                <td>$val</td>
+                                </tr>
+                                ";
+                        }
                     }
                     ?>
                 </tbody>
@@ -133,26 +123,32 @@ if(isset($_POST['hapus'])){
                 <tbody>
                     <?php 
 
-                    $SQL = "select * from pxci";
+                    foreach ($dataDetail as $kelas => $data) {
+                        foreach ($data as $atribut => $value) {
+                                    
+                                $a = $value['countValues'];
+                                $a1 = $value['countZero'];
+                                $b = $value['countFiltered'];
+                                $val = $value['meanPxPositive'];
+                                $valNeg = $value['meanPxNegative'];
 
-                    $rs = mysqli_query($koneksi,$SQL);
-                    while($row = mysqli_fetch_array($rs)){
-                        $kelas = $row['kelas'];
-                        $atribut = $row['atribut'];
-                        $kelas_p = $row['kelas_prediksi'];
-                        $a = $row['count_of'];
-                        $b = $row['count_all'];
-                        $val = $row['val'];
-
-                        echo "
-                        <tr>
-                        <td>$kelas</td>
-                        <td>$atribut</td>
-                        <td>$kelas_p</td>
-                        <td>$a / $b</td>
-                        <td>$val</td>
-                        </tr>
-                        ";
+                                echo "
+                                <tr>
+                                    <td>$kelas</td>
+                                    <td>$atribut</td>
+                                    <td>Ya</td>
+                                    <td>$a / $b</td>
+                                    <td>$val</td>
+                                </tr>
+                                <tr>
+                                    <td>$kelas</td>
+                                    <td>$atribut</td>
+                                    <td>Tidak</td>
+                                    <td>$a1 / $b</td>
+                                    <td>$valNeg</td>
+                                </tr>
+                                ";
+                        }
                     }
                     ?>
                 </tbody>
